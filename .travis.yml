@@ -1,0 +1,16 @@
+sudo: false
+language: java
+jdk:
+- oraclejdk8
+env:
+  global:
+  - TERM=dumb
+  - secure: 8sg8MsusiPoWaj8f5liV77sv9e7jI2bfvdiKqYXkztO8CQJC+8yjQ3xRR/I9o47+Kb1znKuh+7uX863EFOFJN+aksv20fr9h761uGrl/zuBrYBqJxrfywDtkOQ2i4fzesARqFD8Yjq1Tjn87eDrwO4JHzp8sQp1Vo4JeeYd9HMxhGabDQ27qdR2ZMFjxpEIMJ/tJWasizA6ZlAgkJOMha2F0wVkEufgudZ8ItGfj11hIqq7YPi5fIXuXAl1ZYqS0eZ2AyOD2tOvO8dhdP127Q0Pr/x/qoGr2JBhVRg6ypTkMj1sSe/geZoUP80PAqES9Rf3sU+pPUOL6hMprh5xMyikz3czlrJnPaatA+ery4DGXZgnRh74bFBkQ3FOT3QZEW9yVeLLGjHz5w8BdPxqxyd342QuiUeDEjjCel54yS4TfDuZOkb9hCQnUB5oQeBxSB5DstEvbWENjELaFfK8iGE+38c2RtbFheewFUsd6+wMKzP6rh1O0kH4s8p3D6JRIV7/k9ZAX/KzGFsqdhvR//at5qHWIvP+bPGiEXn3NhaGOkP52H1TghFaXzi8gTTqSqOX+iqJfIxzUsAlHtPifwAkc8xcZIzmtIsn0LLiBfCkPbN+XXebwO+XTwpEhlAkrsOZ29N7rnEK8vFsMID8psQRvYYS/GdV+PdK/XhEImLE=
+script:
+- "./gradlew clean build --stacktrace --info -Dscan"
+deploy:
+  provider: script
+  script: "./gradlew :client:bintrayUpload -x check --info --stacktrace"
+  skip_cleanup: true
+  on:
+    branch: master
