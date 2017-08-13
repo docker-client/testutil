@@ -14,7 +14,7 @@ import java.io.ByteArrayOutputStream
  */
 class MemoryAppender : OutputStreamAppender<ILoggingEvent>() {
 
-    val loggedEvents: ArrayList<ILoggingEvent> = arrayListOf()
+    private val loggedEvents: ArrayList<ILoggingEvent> = arrayListOf()
 
     companion object {
         @JvmStatic fun clearLoggedEvents() {
