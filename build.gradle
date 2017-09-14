@@ -2,6 +2,7 @@ import java.text.SimpleDateFormat
 
 buildscript {
     ext {
+        junit_platform_version = '1.0.0-RC3'
         kotlin_version = "1.1.4-3"
     }
 
@@ -15,7 +16,7 @@ buildscript {
     dependencies {
         classpath "com.github.ben-manes:gradle-versions-plugin:0.15.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.junit.platform:junit-platform-gradle-plugin:1.0.0"
+        classpath "org.junit.platform:junit-platform-gradle-plugin:$junit_platform_version"
         classpath "gradle.plugin.net.ossindex:ossindex-gradle-plugin:0.1.1"
         classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3"
     }
@@ -83,7 +84,7 @@ dependencies {
         exclude group: 'org.junit.platform'
         exclude group: 'org.jetbrains.kotlin'
     }
-    testRuntime "org.junit.platform:junit-platform-launcher:1.0.0"
+    testRuntime "org.junit.platform:junit-platform-launcher:$junit_platform_version"
 }
 
 junitPlatform {
