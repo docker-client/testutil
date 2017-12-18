@@ -2,8 +2,8 @@ import java.text.SimpleDateFormat
 
 buildscript {
     ext {
-        junit_platform_version = '1.0.1'
-        kotlin_version = "1.1.51"
+        junit_platform_version = '1.0.2'
+        kotlin_version = "1.2.10"
     }
 
     repositories {
@@ -14,11 +14,11 @@ buildscript {
     }
 
     dependencies {
-        classpath "com.github.ben-manes:gradle-versions-plugin:0.15.0"
+        classpath "com.github.ben-manes:gradle-versions-plugin:0.17.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.junit.platform:junit-platform-gradle-plugin:$junit_platform_version"
         classpath "gradle.plugin.net.ossindex:ossindex-gradle-plugin:0.1.1"
-        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3"
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0"
     }
 }
 
@@ -136,6 +136,6 @@ bintray {
 bintrayUpload.dependsOn build
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '4.2.1'
+    gradleVersion = '4.4'
     distributionType = Wrapper.DistributionType.ALL
 }
