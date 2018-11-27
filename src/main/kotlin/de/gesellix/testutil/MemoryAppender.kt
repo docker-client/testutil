@@ -17,11 +17,13 @@ class MemoryAppender : OutputStreamAppender<ILoggingEvent>() {
     private val loggedEvents: ArrayList<ILoggingEvent> = arrayListOf()
 
     companion object {
-        @JvmStatic fun clearLoggedEvents() {
+        @JvmStatic
+        fun clearLoggedEvents() {
             getMemoryAppender().clear()
         }
 
-        @JvmStatic fun findLoggedEvent(needle: ILoggingEvent): ILoggingEvent? {
+        @JvmStatic
+        fun findLoggedEvent(needle: ILoggingEvent): ILoggingEvent? {
             val memoryAppender = getMemoryAppender()
             val events = memoryAppender.getLoggedEvents()
             return events.find { e: ILoggingEvent ->
@@ -29,7 +31,8 @@ class MemoryAppender : OutputStreamAppender<ILoggingEvent>() {
             }
         }
 
-        @JvmStatic fun getMemoryAppender(): MemoryAppender {
+        @JvmStatic
+        fun getMemoryAppender(): MemoryAppender {
             val rootLogger = getLogger(ROOT_LOGGER_NAME) as Logger
             val memoryAppender = rootLogger.iteratorForAppenders().asSequence().find { it is MemoryAppender }
                     ?: throw IllegalStateException("Didn't find MemoryAppender. Please check your logback(-test) config.")
