@@ -20,9 +20,9 @@ buildscript {
 plugins {
     kotlin("jvm") version "1.3.21"
     `maven-publish`
-    id("com.github.ben-manes.versions") version "0.20.0"
+    id("com.github.ben-manes.versions") version "0.21.0"
     id("com.jfrog.bintray") version "1.8.4"
-    id("net.ossindex.audit") version "0.4.8"
+    id("net.ossindex.audit") version "0.4.10"
 }
 
 java {
@@ -45,8 +45,8 @@ tasks {
         dependsOn("build")
     }
 
-    register<Wrapper>("updateWrapper") {
-        gradleVersion = "5.2.1"
+    wrapper {
+        gradleVersion = "5.3"
         distributionType = Wrapper.DistributionType.ALL
     }
 }
