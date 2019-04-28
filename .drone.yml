@@ -3,7 +3,7 @@ kind: pipeline
 name: default
 
 steps:
-    - name: jar
+    - name: clean build
       image: openjdk:8-jdk-stretch
       commands:
           - ./gradlew clean build --info --stacktrace
@@ -12,6 +12,6 @@ steps:
               - master
 ---
 kind: signature
-hmac: 1ab7f9d91495af3f4e4b1e75fdd312f3ed472cf1caae2cbe995b8e0c81c3b47e
+hmac: a28605c6e833ec73d6fe318ab5f6a94c46020385064288816a8f22a3a17535d2
 
 ...
