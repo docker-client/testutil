@@ -1,0 +1,17 @@
+---
+kind: pipeline
+name: default
+
+steps:
+    - name: jar
+      image: openjdk:8-jdk-stretch
+      commands:
+          - ./gradlew clean build --info --stacktrace
+      when:
+          branch:
+              - master
+---
+kind: signature
+hmac: 1ab7f9d91495af3f4e4b1e75fdd312f3ed472cf1caae2cbe995b8e0c81c3b47e
+
+...
