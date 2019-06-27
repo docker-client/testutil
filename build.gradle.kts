@@ -18,11 +18,11 @@ buildscript {
 }
 
 plugins {
-    kotlin("jvm") version "1.3.21"
+    kotlin("jvm") version "1.3.40"
     `maven-publish`
     id("com.github.ben-manes.versions") version "0.21.0"
     id("com.jfrog.bintray") version "1.8.4"
-    id("net.ossindex.audit") version "0.4.10"
+    id("net.ossindex.audit") version "0.4.11"
 }
 
 java {
@@ -46,12 +46,12 @@ tasks {
     }
 
     wrapper {
-        gradleVersion = "5.3.1"
+        gradleVersion = "5.4.1"
         distributionType = Wrapper.DistributionType.ALL
     }
 }
 
-val dependencyVersions = listOf(
+val dependencyVersions = listOf<String>(
 )
 
 configurations.all {
