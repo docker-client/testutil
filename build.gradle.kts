@@ -18,9 +18,9 @@ buildscript {
 }
 
 plugins {
-    kotlin("jvm") version "1.3.40"
+    kotlin("jvm") version "1.3.50"
     `maven-publish`
-    id("com.github.ben-manes.versions") version "0.21.0"
+    id("com.github.ben-manes.versions") version "0.24.0"
     id("com.jfrog.bintray") version "1.8.4"
     id("net.ossindex.audit") version "0.4.11"
 }
@@ -82,7 +82,7 @@ dependencies {
         exclude("org.junit.platform")
         exclude("org.jetbrains.kotlin")
     }
-    testRuntime("org.junit.platform:junit-platform-launcher:1.4.0")
+    testRuntime("org.junit.platform:junit-platform-launcher:1.5.1")
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
