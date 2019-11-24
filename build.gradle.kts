@@ -18,12 +18,12 @@ buildscript {
 }
 
 plugins {
-    kotlin("jvm") version "1.3.50"
+    kotlin("jvm") version "1.3.60"
     `maven-publish`
-    id("com.github.ben-manes.versions") version "0.24.0"
+    id("com.github.ben-manes.versions") version "0.27.0"
     id("com.jfrog.bintray") version "1.8.4"
     id("net.ossindex.audit") version "0.4.11"
-    id("io.freefair.github.package-registry-maven-publish") version "4.0.1"
+    id("io.freefair.github.package-registry-maven-publish") version "4.1.5"
 }
 
 java {
