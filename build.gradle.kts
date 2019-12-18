@@ -1,10 +1,7 @@
 import com.jfrog.bintray.gradle.BintrayExtension
-import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.text.SimpleDateFormat
 import java.util.*
 
-val kotlinVersion = plugins.getPlugin(KotlinPluginWrapper::class.java).kotlinPluginVersion
 rootProject.extra.set("artifactVersion", SimpleDateFormat("yyyy-MM-dd\'T\'HH-mm-ss").format(Date()))
 rootProject.extra.set("bintrayDryRun", false)
 
@@ -12,18 +9,43 @@ buildscript {
     repositories {
         mavenLocal()
         jcenter()
-        gradlePluginPortal()
         mavenCentral()
     }
 }
 
 plugins {
-    kotlin("jvm") version "1.3.60"
-    `maven-publish`
+    id("java-library")
+    id("groovy")
+    id("maven-publish")
     id("com.github.ben-manes.versions") version "0.27.0"
     id("com.jfrog.bintray") version "1.8.4"
     id("net.ossindex.audit") version "0.4.11"
-    id("io.freefair.github.package-registry-maven-publish") version "4.1.5"
+    id("io.freefair.github.package-registry-maven-publish") version "4.1.6"
+}
+
+repositories {
+    mavenLocal()
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    api("org.slf4j:slf4j-api:1.7.29")
+    api("ch.qos.logback:logback-classic:1.2.3")
+    testImplementation("org.codehaus.groovy:groovy:2.5.8")
+    testImplementation("org.spockframework:spock-core:1.3-groovy-2.5")
+}
+
+val dependencyVersions = listOf(
+        "org.codehaus.groovy:groovy:2.5.8",
+        "org.slf4j:slf4j-api:1.7.29"
+)
+
+configurations.all {
+    resolutionStrategy {
+        failOnVersionConflict()
+        force(dependencyVersions)
+    }
 }
 
 java {
@@ -32,14 +54,11 @@ java {
 }
 
 tasks {
-    withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "1.8"
-    }
-
     withType(Test::class.java) {
-        useJUnitPlatform {
-            includeEngines("spek")
-        }
+        useJUnit()
+
+        // for the de.gesellix.testutil.ResourceReaderTest
+        environment("ROOT_PROJECT_BUILD_DIRECTORY", rootProject.buildDir)
     }
 
     bintrayUpload {
@@ -50,40 +69,6 @@ tasks {
         gradleVersion = "6.0.1"
         distributionType = Wrapper.DistributionType.ALL
     }
-}
-
-val dependencyVersions = listOf<String>(
-)
-
-configurations.all {
-    resolutionStrategy {
-        failOnVersionConflict()
-        force(dependencyVersions)
-    }
-}
-
-repositories {
-    mavenCentral()
-    jcenter()
-    maven { setUrl("http://dl.bintray.com/jetbrains/spek") }
-    mavenCentral()
-}
-
-dependencies {
-    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion")
-
-    compile("org.slf4j:slf4j-api:1.7.25")
-    compile("ch.qos.logback:logback-classic:1.2.3")
-
-    testCompile("org.jetbrains.kotlin:kotlin-test")
-    testCompile("org.jetbrains.spek:spek-api:1.2.1") {
-        exclude("org.jetbrains.kotlin")
-    }
-    testRuntime("org.jetbrains.spek:spek-junit-platform-engine:1.2.1") {
-        exclude("org.junit.platform")
-        exclude("org.jetbrains.kotlin")
-    }
-    testRuntime("org.junit.platform:junit-platform-launcher:1.5.1")
 }
 
 val sourcesJar by tasks.registering(Jar::class) {
