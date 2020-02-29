@@ -21,7 +21,7 @@ import static org.slf4j.Logger.ROOT_LOGGER_NAME;
  */
 public class MemoryAppender extends OutputStreamAppender<ILoggingEvent> {
 
-    private List<ILoggingEvent> loggedEvents = new ArrayList<>();
+    private final List<ILoggingEvent> loggedEvents = new ArrayList<>();
 
     public static void clearLoggedEvents() {
         getMemoryAppender().clear();
