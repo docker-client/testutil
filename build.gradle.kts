@@ -30,9 +30,9 @@ repositories {
 }
 
 dependencies {
-    api("org.slf4j:slf4j-api:1.7.29")
     api("ch.qos.logback:logback-classic:1.2.3")
-    testImplementation("org.codehaus.groovy:groovy:2.5.8")
+    implementation("org.slf4j:slf4j-api:1.7.30")
+    testImplementation("org.codehaus.groovy:groovy:2.5.9")
     testImplementation("org.spockframework:spock-core:1.3-groovy-2.5")
 }
 
