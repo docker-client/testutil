@@ -37,8 +37,8 @@ dependencies {
 }
 
 val dependencyVersions = listOf(
-        "org.codehaus.groovy:groovy:2.5.8",
-        "org.slf4j:slf4j-api:1.7.29"
+        "org.codehaus.groovy:groovy:2.5.9",
+        "org.slf4j:slf4j-api:1.7.30"
 )
 
 configurations.all {
@@ -89,7 +89,15 @@ publishing {
             artifactId = "testutil"
             version = rootProject.extra["artifactVersion"] as String
             from(components["java"])
-//            artifact(sourcesJar.get())
+            artifact(sourcesJar.get())
+            versionMapping {
+                usage("java-api") {
+                    fromResolutionOf("runtimeClasspath")
+                }
+                usage("java-runtime") {
+                    fromResolutionResult()
+                }
+            }
         }
     }
 }
