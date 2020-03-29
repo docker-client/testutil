@@ -30,21 +30,36 @@ repositories {
 }
 
 dependencies {
+    constraints {
+        implementation("org.slf4j:slf4j-api") {
+            version {
+                strictly("1.7.30")
+            }
+        }
+    }
     api("ch.qos.logback:logback-classic:1.2.3")
-    implementation("org.slf4j:slf4j-api:1.7.30")
+    implementation("org.slf4j:slf4j-api")
     testImplementation("org.codehaus.groovy:groovy:2.5.9")
     testImplementation("org.spockframework:spock-core:1.3-groovy-2.5")
 }
 
-val dependencyVersions = listOf(
-        "org.codehaus.groovy:groovy:2.5.9",
-        "org.slf4j:slf4j-api:1.7.30"
+val dependencyVersions = listOf<String>(
+)
+
+val dependencyGroupVersions = mapOf(
+        "org.codehaus.groovy" to "2.5.9"
 )
 
 configurations.all {
     resolutionStrategy {
         failOnVersionConflict()
         force(dependencyVersions)
+        eachDependency {
+            val forcedVersion = dependencyGroupVersions[requested.group]
+            if (forcedVersion != null) {
+                useVersion(forcedVersion)
+            }
+        }
     }
 }
 
