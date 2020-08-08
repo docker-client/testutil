@@ -17,10 +17,10 @@ plugins {
     id("java-library")
     id("groovy")
     id("maven-publish")
-    id("com.github.ben-manes.versions") version "0.28.0"
-    id("com.jfrog.bintray") version "1.8.4"
+    id("com.github.ben-manes.versions") version "0.29.0"
+    id("com.jfrog.bintray") version "1.8.5"
     id("net.ossindex.audit") version "0.4.11"
-    id("io.freefair.github.package-registry-maven-publish") version "4.1.6"
+    id("io.freefair.github.package-registry-maven-publish") version "5.1.1"
 }
 
 repositories {
@@ -39,7 +39,7 @@ dependencies {
     }
     api("ch.qos.logback:logback-classic:1.2.3")
     implementation("org.slf4j:slf4j-api")
-    testImplementation("org.codehaus.groovy:groovy:2.5.9")
+    testImplementation("org.codehaus.groovy:groovy:2.5.13")
     testImplementation("org.spockframework:spock-core:1.3-groovy-2.5")
 }
 
@@ -47,7 +47,7 @@ val dependencyVersions = listOf<String>(
 )
 
 val dependencyGroupVersions = mapOf(
-        "org.codehaus.groovy" to "2.5.9"
+        "org.codehaus.groovy" to "2.5.13"
 )
 
 configurations.all {
@@ -81,7 +81,7 @@ tasks {
     }
 
     wrapper {
-        gradleVersion = "6.3"
+        gradleVersion = "6.5.1"
         distributionType = Wrapper.DistributionType.ALL
     }
 }
