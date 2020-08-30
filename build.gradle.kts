@@ -33,22 +33,27 @@ dependencies {
     constraints {
         implementation("org.slf4j:slf4j-api") {
             version {
-                strictly("1.7.30")
+                strictly("[1.7,1.8)")
+                prefer("1.7.30")
+            }
+        }
+        api("ch.qos.logback:logback-classic") {
+            version {
+                strictly("[1.2,2)")
+                prefer("1.2.3")
             }
         }
     }
     api("ch.qos.logback:logback-classic:1.2.3")
     implementation("org.slf4j:slf4j-api")
-    testImplementation("org.codehaus.groovy:groovy:2.5.13")
+    testImplementation("org.codehaus.groovy:groovy:[2.5,3)!!2.5.13")
     testImplementation("org.spockframework:spock-core:1.3-groovy-2.5")
 }
 
 val dependencyVersions = listOf<String>(
 )
 
-val dependencyGroupVersions = mapOf(
-        "org.codehaus.groovy" to "2.5.13"
-)
+val dependencyGroupVersions = mapOf<String, String>()
 
 configurations.all {
     resolutionStrategy {
