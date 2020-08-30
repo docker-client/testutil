@@ -44,7 +44,7 @@ dependencies {
             }
         }
     }
-    api("ch.qos.logback:logback-classic:1.2.3")
+    api("ch.qos.logback:logback-classic")
     implementation("org.slf4j:slf4j-api")
     testImplementation("org.codehaus.groovy:groovy:[2.5,3)!!2.5.13")
     testImplementation("org.spockframework:spock-core:1.3-groovy-2.5")
@@ -110,14 +110,6 @@ publishing {
             version = rootProject.extra["artifactVersion"] as String
             from(components["java"])
             artifact(sourcesJar.get())
-            versionMapping {
-                usage("java-api") {
-                    fromResolutionOf("runtimeClasspath")
-                }
-                usage("java-runtime") {
-                    fromResolutionResult()
-                }
-            }
         }
     }
 }
