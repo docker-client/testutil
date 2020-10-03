@@ -17,10 +17,10 @@ plugins {
     id("java-library")
     id("groovy")
     id("maven-publish")
-    id("com.github.ben-manes.versions") version "0.29.0"
+    id("com.github.ben-manes.versions") version "0.33.0"
     id("com.jfrog.bintray") version "1.8.5"
     id("net.ossindex.audit") version "0.4.11"
-    id("io.freefair.github.package-registry-maven-publish") version "5.1.1"
+    id("io.freefair.github.package-registry-maven-publish") version "5.2.1"
 }
 
 repositories {
