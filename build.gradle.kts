@@ -91,6 +91,12 @@ tasks {
     }
 }
 
+val javadocJar by tasks.registering(Jar::class) {
+    dependsOn("classes")
+    archiveClassifier.set("javadoc")
+    from(tasks.javadoc)
+}
+
 val sourcesJar by tasks.registering(Jar::class) {
     dependsOn("classes")
     archiveClassifier.set("sources")
@@ -99,6 +105,7 @@ val sourcesJar by tasks.registering(Jar::class) {
 
 artifacts {
     add("archives", sourcesJar.get())
+    add("archives", javadocJar.get())
 }
 
 val publicationName = "testutil"
@@ -110,6 +117,7 @@ publishing {
             version = rootProject.extra["artifactVersion"] as String
             from(components["java"])
             artifact(sourcesJar.get())
+            artifact(javadocJar.get())
         }
     }
 }
