@@ -67,11 +67,6 @@ tasks {
     // for the de.gesellix.testutil.ResourceReaderTest
     environment("ROOT_PROJECT_BUILD_DIRECTORY", rootProject.buildDir)
   }
-
-  wrapper {
-    gradleVersion = "6.8.2"
-    distributionType = Wrapper.DistributionType.ALL
-  }
 }
 
 val javadocJar by tasks.registering(Jar::class) {
