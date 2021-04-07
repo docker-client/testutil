@@ -33,8 +33,8 @@ dependencies {
   }
   api("ch.qos.logback:logback-classic")
   implementation("org.slf4j:slf4j-api")
-  testImplementation("org.codehaus.groovy:groovy:2.5.13")
-  testImplementation("org.spockframework:spock-core:1.3-groovy-2.5")
+  testImplementation("org.codehaus.groovy:groovy:3.0.7")
+  testImplementation("org.spockframework:spock-core:2.0-M5-groovy-3.0")
 }
 
 val dependencyVersions = listOf<String>(
@@ -60,13 +60,34 @@ java {
   targetCompatibility = JavaVersion.VERSION_1_8
 }
 
+var testCounter = 0L
+
 tasks {
   withType(Test::class.java) {
-    useJUnit()
+    useJUnitPlatform()
 
     // for the de.gesellix.testutil.ResourceReaderTest
     environment("ROOT_PROJECT_BUILD_DIRECTORY", rootProject.buildDir)
+
+    testLogging {
+      afterSuite( KotlinClosure2({ desc: TestDescriptor, result :TestResult->
+        if (desc.parent != null) { // will match the outermost suite
+          testCounter += result.testCount
+        }
+      }))
+    }
   }
+
+  check.get().finalizedBy(register("checkContracttestCount") {
+    doLast {
+      logger.info("checking test count: $testCounter")
+      if (testCounter == 0L) {
+        // TODO check only when test tasks aren't "UP-TO-DATE"
+        logger.warn("No tests performed. Please check your config and test artifacts.")
+//        throw GradleException("No tests performed. Please check your config and test artifacts.")
+      }
+    }
+  })
 }
 
 val javadocJar by tasks.registering(Jar::class) {
