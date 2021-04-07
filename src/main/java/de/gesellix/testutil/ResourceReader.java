@@ -5,12 +5,12 @@ import java.net.URISyntaxException;
 
 public class ResourceReader {
 
-    public static File getClasspathResourceAsFile(String classpathResource, Class<?> baseClass) {
-        try {
-            return new File(baseClass.getResource(classpathResource).toURI());
-        }
-        catch (URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
+  public static File getClasspathResourceAsFile(String classpathResource, Class<?> baseClass) {
+    try {
+      return new File(baseClass.getResource(classpathResource).toURI());
     }
+    catch (URISyntaxException e) {
+      throw new RuntimeException(e);
+    }
+  }
 }

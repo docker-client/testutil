@@ -21,49 +21,49 @@ import static org.slf4j.Logger.ROOT_LOGGER_NAME;
  */
 public class MemoryAppender extends OutputStreamAppender<ILoggingEvent> {
 
-    private final List<ILoggingEvent> loggedEvents = new ArrayList<>();
+  private final List<ILoggingEvent> loggedEvents = new ArrayList<>();
 
-    public static void clearLoggedEvents() {
-        getMemoryAppender().clear();
-    }
+  public static void clearLoggedEvents() {
+    getMemoryAppender().clear();
+  }
 
-    public static ILoggingEvent findLoggedEvent(ILoggingEvent needle) {
-        MemoryAppender memoryAppender = getMemoryAppender();
-        List<ILoggingEvent> events = memoryAppender.getLoggedEvents();
-        return events.stream().filter(e -> Objects.equals(e.getLevel(), needle.getLevel()) && Objects.equals(e.getMessage(), needle.getMessage()))
-                .findFirst()
-                .orElse(null);
-    }
+  public static ILoggingEvent findLoggedEvent(ILoggingEvent needle) {
+    MemoryAppender memoryAppender = getMemoryAppender();
+    List<ILoggingEvent> events = memoryAppender.getLoggedEvents();
+    return events.stream().filter(e -> Objects.equals(e.getLevel(), needle.getLevel()) && Objects.equals(e.getMessage(), needle.getMessage()))
+        .findFirst()
+        .orElse(null);
+  }
 
-    public static MemoryAppender getMemoryAppender() {
-        Logger rootLogger = (Logger) LoggerFactory.getLogger(ROOT_LOGGER_NAME);
-        Iterator<Appender<ILoggingEvent>> appenderIterator = rootLogger.iteratorForAppenders();
-        while (appenderIterator.hasNext()) {
-            Appender<ILoggingEvent> appender = appenderIterator.next();
-            if (appender instanceof MemoryAppender) {
-                return (MemoryAppender) appender;
-            }
-        }
-        throw new IllegalStateException("Didn't find a MemoryAppender. Please check your logback(-test) config.");
+  public static MemoryAppender getMemoryAppender() {
+    Logger rootLogger = (Logger) LoggerFactory.getLogger(ROOT_LOGGER_NAME);
+    Iterator<Appender<ILoggingEvent>> appenderIterator = rootLogger.iteratorForAppenders();
+    while (appenderIterator.hasNext()) {
+      Appender<ILoggingEvent> appender = appenderIterator.next();
+      if (appender instanceof MemoryAppender) {
+        return (MemoryAppender) appender;
+      }
     }
+    throw new IllegalStateException("Didn't find a MemoryAppender. Please check your logback(-test) config.");
+  }
 
-    @Override
-    public void start() {
-        setOutputStream(new ByteArrayOutputStream());
-        super.start();
-    }
+  @Override
+  public void start() {
+    setOutputStream(new ByteArrayOutputStream());
+    super.start();
+  }
 
-    @Override
-    public void subAppend(ILoggingEvent event) {
-        super.subAppend(event);
-        loggedEvents.add(event);
-    }
+  @Override
+  public void subAppend(ILoggingEvent event) {
+    super.subAppend(event);
+    loggedEvents.add(event);
+  }
 
-    public List<ILoggingEvent> getLoggedEvents() {
-        return loggedEvents;
-    }
+  public List<ILoggingEvent> getLoggedEvents() {
+    return loggedEvents;
+  }
 
-    public void clear() {
-        loggedEvents.clear();
-    }
+  public void clear() {
+    loggedEvents.clear();
+  }
 }

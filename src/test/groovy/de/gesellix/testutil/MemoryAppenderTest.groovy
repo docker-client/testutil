@@ -7,23 +7,23 @@ import spock.lang.Specification
 
 class MemoryAppenderTest extends Specification {
 
-    def setup() {
-        MemoryAppender.clearLoggedEvents()
+  def setup() {
+    MemoryAppender.clearLoggedEvents()
+  }
+
+  def "collects log events"() {
+    given:
+    def logger = LoggerFactory.getLogger("for-test")
+
+    when:
+    logger.info("let's log something")
+
+    then:
+    def event = new LoggingEvent().with {
+      it.level = Level.INFO
+      it.message = "let's log something"
+      it
     }
-
-    def "collects log events"() {
-        given:
-        def logger = LoggerFactory.getLogger("for-test")
-
-        when:
-        logger.info("let's log something")
-        def event = new LoggingEvent().with {
-            it.level = Level.INFO
-            it.message = "let's log something"
-            it
-        }
-
-        then:
-        MemoryAppender.findLoggedEvent(event)
-    }
+    MemoryAppender.findLoggedEvent(event)
+  }
 }
