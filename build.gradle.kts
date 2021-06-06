@@ -33,8 +33,8 @@ dependencies {
   }
   api("ch.qos.logback:logback-classic")
   implementation("org.slf4j:slf4j-api")
-  testImplementation("org.codehaus.groovy:groovy:(2.5,3]!!2.5.14")
-  testImplementation("org.spockframework:spock-core:2.0-groovy-2.5")
+  testImplementation("org.codehaus.groovy:groovy:(3,4]!!3.0.8")
+  testImplementation("org.spockframework:spock-core:2.0-groovy-3.0")
 }
 
 val dependencyVersions = listOf<String>(
