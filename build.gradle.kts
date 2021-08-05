@@ -27,7 +27,7 @@ dependencies {
     api("ch.qos.logback:logback-classic") {
       version {
         strictly("[1.2,2)")
-        prefer("1.2.3")
+        prefer("1.2.5")
       }
     }
   }
