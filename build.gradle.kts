@@ -17,22 +17,8 @@ repositories {
 }
 
 dependencies {
-  constraints {
-    implementation("org.slf4j:slf4j-api") {
-      version {
-        strictly("[1.7,1.8)")
-        prefer("1.7.32")
-      }
-    }
-    api("ch.qos.logback:logback-classic") {
-      version {
-        strictly("[1.2,2)")
-        prefer("1.2.5")
-      }
-    }
-  }
-  api("ch.qos.logback:logback-classic")
-  implementation("org.slf4j:slf4j-api")
+  api("ch.qos.logback:logback-classic:[1.2,2)!!1.2.6")
+  implementation("org.slf4j:slf4j-api:[1.7,1.8)!!1.7.32")
   testImplementation("org.codehaus.groovy:groovy:(3,4]!!3.0.8")
   testImplementation("org.spockframework:spock-core:2.0-groovy-3.0")
 }
