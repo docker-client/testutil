@@ -17,9 +17,9 @@ repositories {
 }
 
 dependencies {
-  api("ch.qos.logback:logback-classic:[1.2,2)!!1.2.9")
-  implementation("org.slf4j:slf4j-api:[1.7,1.8)!!1.7.32")
-  testImplementation("org.codehaus.groovy:groovy:(3,4]!!3.0.9")
+  api("ch.qos.logback:logback-classic:[1.2,1.3)!!1.2.10")
+  implementation("org.slf4j:slf4j-api:[1.7,1.8)!!1.7.36")
+  testImplementation("org.codehaus.groovy:groovy:[3,4)!!3.0.9")
   testImplementation("org.spockframework:spock-core:2.0-groovy-3.0")
 }
 
@@ -47,7 +47,7 @@ java {
 }
 
 tasks {
-  withType(Test::class.java) {
+  withType(Test::class) {
     useJUnitPlatform()
 
     // for the de.gesellix.testutil.ResourceReaderTest
