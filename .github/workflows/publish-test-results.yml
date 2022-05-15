@@ -45,5 +45,6 @@ jobs:
       - name: Publish Test Results
         uses: scacap/action-surefire-report@v1
         with:
+          commit: ${{ github.event.workflow_run.head_commit.id }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           report_paths: '**/build/test-results/test/TEST-*.xml'
