@@ -18,7 +18,7 @@ repositories {
 
 dependencies {
   api("ch.qos.logback:logback-classic:[1.2,2)!!1.3.3")
-  implementation("org.slf4j:slf4j-api:[1.7,3)!!2.0.3")
+  implementation("org.slf4j:slf4j-api:[1.7,3)!!2.0.5")
   testImplementation("org.spockframework:spock-core:2.3-groovy-4.0")
 }
 
@@ -40,12 +40,16 @@ configurations.all {
 }
 
 java {
-  sourceCompatibility = JavaVersion.VERSION_1_8
-  targetCompatibility = JavaVersion.VERSION_1_8
+  toolchain {
+    languageVersion.set(JavaLanguageVersion.of(8))
+  }
 }
 
 tasks {
-  withType(Test::class) {
+  withType<JavaCompile> {
+    options.encoding = "UTF-8"
+  }
+  withType<Test> {
     useJUnitPlatform()
 
     // for the de.gesellix.testutil.ResourceReaderTest
