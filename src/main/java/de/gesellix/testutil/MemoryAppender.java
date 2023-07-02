@@ -15,7 +15,7 @@ import java.util.Objects;
 import static org.slf4j.Logger.ROOT_LOGGER_NAME;
 
 /**
- * From https://github.com/grails-plugins/grails-logback/blob/master/src/java/grails/plugin/logback/MemoryAppender.java
+ * From <a href="https://github.com/grails-plugins/grails-logback/blob/6f13c7b17c16a08b8a355031c20c0f6c71a80d33/src/java/grails/plugin/logback/MemoryAppender.java">github.com/grails-plugins/grails-logback/.../MemoryAppender.java</a>
  *
  * @author <a href='mailto:burt@burtbeckwith.com'>Burt Beckwith</a>
  */
