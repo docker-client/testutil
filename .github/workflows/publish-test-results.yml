@@ -11,6 +11,7 @@ on:
     workflows:
       - CI
       - Publish
+      - Release
     types:
       - completed
 permissions: {}
