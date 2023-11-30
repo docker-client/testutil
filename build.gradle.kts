@@ -53,7 +53,7 @@ tasks {
     useJUnitPlatform()
 
     // for the de.gesellix.testutil.ResourceReaderTest
-    environment("ROOT_PROJECT_BUILD_DIRECTORY", rootProject.buildDir)
+    environment("ROOT_PROJECT_BUILD_DIRECTORY", rootProject.layout.buildDirectory)
   }
 }
 
