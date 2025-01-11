@@ -17,8 +17,8 @@ repositories {
 }
 
 dependencies {
-  api("ch.qos.logback:logback-classic:[1.2,2)!!1.3.14")
-  implementation("org.slf4j:slf4j-api:[1.7,3)!!2.0.16")
+  api("ch.qos.logback:logback-classic:${libs.versions.logbackVersionrange.get()}!!${libs.versions.logback.get()}")
+  implementation("org.slf4j:slf4j-api:${libs.versions.slf4jVersionrange.get()}!!${libs.versions.slf4j.get()}")
   testImplementation("org.spockframework:spock-core:2.3-groovy-4.0")
 }
 
