@@ -5,6 +5,6 @@ slf4j = "2.0.16"
 slf4jVersionrange = "[1.7,3)"
 
 [libraries]
-junit4 = { module = "junit:junit", version = "4.13.1" }
+junit4 = { module = "junit:junit", version = "4.13.2" }
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 slf4j = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
