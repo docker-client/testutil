@@ -22,7 +22,9 @@ dependencies {
   testImplementation("org.spockframework:spock-core:2.3-groovy-4.0")
 }
 
-val dependencyVersions = listOf<String>()
+val dependencyVersions = listOf(
+  libs.junit4
+)
 
 val dependencyGroupVersions = mapOf<String, String>()
 
