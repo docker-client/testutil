@@ -7,7 +7,7 @@ plugins {
   id("maven-publish")
   id("signing")
   id("com.github.ben-manes.versions") version "0.52.0"
-  id("net.ossindex.audit") version "0.4.11"
+  id("org.sonatype.gradle.plugins.scan") version "3.1.4"
   id("io.freefair.maven-central.validate-poms") version "8.14.2"
   id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
 }
@@ -134,15 +134,18 @@ signing {
   sign(publishing.publications[publicationName])
 }
 
+ossIndexAudit {
+  username = System.getenv("SONATYPE_INDEX_USERNAME") ?: findProperty("sonatype.index.username")
+  password = System.getenv("SONATYPE_INDEX_PASSWORD") ?: findProperty("sonatype.index.password")
+}
+
 nexusPublishing {
   repositories {
     if (!isSnapshot) {
       sonatype {
         // custom repository name - 'sonatype' is pre-configured
         // for Sonatype Nexus (OSSRH) which is used for The Central Repository
-        stagingProfileId.set(
-          System.getenv("SONATYPE_STAGING_PROFILE_ID") ?: findProperty("sonatype.staging.profile.id")
-        ) //can reduce execution time by even 10 seconds
+        stagingProfileId.set(System.getenv("SONATYPE_STAGING_PROFILE_ID") ?: findProperty("sonatype.staging.profile.id")) //can reduce execution time by even 10 seconds
         username.set(System.getenv("SONATYPE_USERNAME") ?: findProperty("sonatype.username"))
         password.set(System.getenv("SONATYPE_PASSWORD") ?: findProperty("sonatype.password"))
         nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
