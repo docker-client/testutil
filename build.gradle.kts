@@ -20,6 +20,7 @@ dependencies {
   api("ch.qos.logback:logback-classic:${libs.versions.logbackVersionrange.get()}!!${libs.versions.logback.get()}")
   implementation("org.slf4j:slf4j-api:${libs.versions.slf4jVersionrange.get()}!!${libs.versions.slf4j.get()}")
   testImplementation("org.spockframework:spock-core:2.3-groovy-4.0")
+  testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 val dependencyVersions = listOf(
@@ -139,7 +140,9 @@ nexusPublishing {
       sonatype {
         // custom repository name - 'sonatype' is pre-configured
         // for Sonatype Nexus (OSSRH) which is used for The Central Repository
-        stagingProfileId.set(System.getenv("SONATYPE_STAGING_PROFILE_ID") ?: findProperty("sonatype.staging.profile.id")) //can reduce execution time by even 10 seconds
+        stagingProfileId.set(
+          System.getenv("SONATYPE_STAGING_PROFILE_ID") ?: findProperty("sonatype.staging.profile.id")
+        ) //can reduce execution time by even 10 seconds
         username.set(System.getenv("SONATYPE_USERNAME") ?: findProperty("sonatype.username"))
         password.set(System.getenv("SONATYPE_PASSWORD") ?: findProperty("sonatype.password"))
         nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
